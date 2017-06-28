@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="jquery-3.1.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="two.css">
+
+</head>
+<body>
+<header><!--头部 搜索框 导航栏-->
+    <div id="search">
+    <form class="search" action=""><!--搜索框-->
+        <input type="text" placeholder="请输入您要查询的内容" name="searchBar" class="searchBar"
+               onBlur="if(this.value=='') this.value='请输入您要查找的内容';"
+               onFocus="this.style.color='#000';if(this.value=='请输入您要查找的内容') this.value='';" value="请输入您要查找的内容">
+        <input type="submit" value="搜索" name="go" class="go"></form>
+    </div>
+    <!--导航栏-->
+    <div class="navigationBar">
+        <ul>
+            <li><a href="#">网站首页</a></li>
+            <li><a href="#">宠界新闻</a></li>
+            <li><a href="#">选宠技巧</a></li>
+            <li><a href="#">养护常识</a></li>
+            <li><a href="#">宠物训练</a></li>
+            <li><a href="#">萌宠乐园</a></li>
+            <li><a href="#">狗狗大全</a></li>
+            <li><a href="#">猫猫大全</a></li>
+            <li><a href="#" class="right"> 宠物大全</a></li>
+        </ul>
+        <hr class="line">
+    </div>
+    <!--物种分类-->
+    <div class="spe">
+        <dl class="species cat">
+            <dt>狗狗</dt>
+            <dd>
+                <a href="#">贵宾犬</a>
+                <a href="#">泰迪犬</a>
+                <a href="#">金毛犬</a>
+                <a href="#">柯基犬</a><br>
+                <a href="#">秋田犬</a>
+                <a href="#">蝴蝶犬</a>
+                <a href="#">哈士奇</a>
+                <a href="#">吉娃娃</a>
+            </dd>
+        </dl>
+        <dl class="species cat">
+            <dt>猫猫</dt>
+            <dd>
+                <a href="#">布偶猫</a>
+                <a href="#">暹罗猫</a>
+                <a href="#">缅甸猫</a>
+                <a href="#">折耳猫</a><br>
+                <a href="#">缅因猫</a>
+                <a href="#">波斯猫</a>
+                <a href="#">埃及猫</a>
+                <a href="#">巴厘猫</a>
+            </dd>
+        </dl>
+        <dl class="species cat">
+            <dt>兔子</dt>
+            <dd>
+                <a href="#">荷兰侏儒兔</a>
+                <a href="#">荷兰兔</a>
+                <a href="#">波兰兔</a><br>
+                <a href="#">迷你垂耳兔</a>
+                <a href="#">海棠兔</a>
+                <a href="#">暹罗兔</a>
+            </dd>
+        </dl>
+        <dl class="species">
+            <dt>鱼宠</dt>
+            <dd>
+                <a href="#">金鱼</a>
+                <a href="#">孔雀鱼</a>
+                <a href="#">鹦鹉鱼</a><br>
+                <a href="#">龙鱼</a>
+                <a href="#">神仙鱼</a>
+                <a href="#">罗汉鱼</a>
+            </dd>
+        </dl>
+        <dl class="species  cat">
+            <dt>小宠</dt>
+            <dd>
+                <a href="#">龙猫</a>
+                <a href="#">八哥</a>
+                <a href="#">宠物貂</a>
+                <a href="#">仓鼠</a>
+                <a href="#">蛐蛐</a>
+                <a href="#">蝈蝈</a>
+                <a href="#">接吻鱼</a>
+                <a href="#">巴西龟</a>
+                <a href="#">变色龙</a>
+            </dd>
+        </dl>
+    </div>
+</header>
+<article style="width: 85%;margin: 0 auto;min-width: 1200px ;clear: left"><!--内容-->
+    <div class="sli-im"><!--轮播-->
+        <div class="slide" id="banner">
+                <div id="banner_bg"><!--标题背景-->    </div>
+                <div id="banner_info"><!--标题-->   </div>
+                <div id="banner_list">
+                    <a href="#" target="_blank"><img src="images/slider12.jpg" title="oo" name="oo" alt="《全世界搜狗》 晒出爱犬 免费送一整年狗粮哦！"> </a>
+                    <a href="#" target="_blank"><img src="images/slider13.jpg" title="oo" name="oo" alt="爱猫人士擅放有色饲料 猫咪吃下后狂吐不止"> </a>
+                    <a href="#" target="_blank"><img src="images/slider13.jpg" title="oo" name="oo" alt="加拿大男子养猫太多 被罚款收监仍不放弃"> </a>
+                </div>
+                <ul>
+                    <li class="on">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </div>
+        <script>
+                var t = n = 0, count;
+                $(document).ready(function () {
+                    count = $("#banner_list a").length;
+                    $("#banner_list a:not(:first-child)").hide();
+                    $("#banner_info").html($("#banner_list a:first-child").find("img").attr('alt'));
+                    $("#banner_info").click(function () {
+                        window.open($("#banner_list a:first-child").attr('href'), "_blank")
+                    });
+                    $("#banner li").click(function () {
+                        var i = $(this).text() - 1;
+                        n = i;
+                        if (i >= count) return;
+                        /*图片下标题文字的转变*/
+                        $("#banner_info").html($("#banner_list a").eq(i).find("img").attr('alt'));
+                        /*点击图片跳转*/
+                        $("#banner_info").unbind().click(function () {
+                            window.open($("#banner_list a").eq(i).attr('href'), "_blank")
+                        });
+                        /*图片的变化*/
+                        $("#banner_list a").filter(":visible").fadeOut(500).parent().children().eq(i).fadeIn(500);
+
+                        document.getElementById("banner").style.background = "";
+
+                        $(this).siblings().removeAttr("class");
+                        /*找到兄弟元素 移除class属性*/
+                        $(this).toggleClass("on");
+                        /*如果有“on”样式 就移除，没有就添加*/
+
+                    });
+                    t = setInterval("showAuto()", 4000);
+
+                    $("#banner").hover(function () {
+                        clearInterval(t)
+                    }, function () {
+                        t = setInterval("showAuto()", 4000);
+                    });
+
+                });
+                function showAuto() {
+                    n = n >= (count - 1) ? 0 : ++n;/*当n>=(count-1)时 n=0 否则n+1 */
+                    $("#banner li").eq(n).trigger('click');
+                }
+
+            </script>
+        <div class="picture ls">
+                <p class="op"><span class="indent colorOrange">每日萌图推荐</span> <span class="viewMore">查看更多</span></p>
+                <p class="img"><img src="images/shye.jpg" width="290"> <br> <a class="bolder">本喵自拍就是这么萌！</a></p>
+                <hr width="290px" style="position: relative;top: 30px">
+                <div class="dog">
+                    <p class="fold12 "><span class="colorOrange ">汪星人|</span><a href="#">自从养了宠物，在家上厕所就一点隐私...</a></p>
+                    <p class="fold12 "><span class="colorOrange ">汪星人|</span><a href="#">犯规！太装可爱了！</a></p>
+
+                </div>
+            </div>
+
+
+    </div>
+    <div class="con-sec " style="position: relative;top: 25px;width: 100% ;height: 380px;"><!--活的不如狗-->
+        <div class="borderOrange" style="width: 70%;">
+            <h2>活的不如狗！住豪华房享受按摩，揭秘超奢华宠物酒店</h2>
+            <ul>
+                <li>阿拉斯加雪橇犬调皮吗 调皮起来很可爱</li>
+                <li>如何让狗狗摆好姿势照相呢？</li>
+            </ul>
+        </div>
+        <div class="top2">
+            <p class="imageBorder"><!--图片--><img src="images/suo.jpg" height="119" width="195"/></p>
+            <div class="textBorder">
+                <h2>你绝对不知道：家长不能碰触的猫训练禁区</h2> <span>2016-06-21</span>
+                <ul class="bor">
+                    <li>英勇消防员为救狗狗 施于人工呼吸救回一命</li>
+                    <li>猫咪变九尾神兽 背后的原因令人心痛</li>
+                </ul>
+            </div>
+
+        </div><hr style="width: 70%;margin-top: 10px">
+        <div class="top">
+
+            <div class="imageBorder"><!--图片--><img src="images/suo2.jpg" height="119" width="195"/></div>
+            <div class="textBorder">
+                <h2>罗威纳犬怎么训 帮你看好庭院的家犬</h2>
+                <span>2016-07-19</span>
+                <ul class="bor">
+                    <li>男子沸水烹煮活狗 手段残忍令人发指</li>
+                    <li>女从美国带狗入境遭拒 竟失控脱衣</li>
+                </ul>
+            </div>
+        </div>
+        <div class="picture lr">
+            <div class="cal"><p> 宠物工具小测试</p>
+                <span class="pic1"><img src="images/pic01.png" height="41" width="41"/><a href="">狗狗体检</a> </span>
+                <span class="pic2"><img src="images/pic02.png" height="41" width="41"/><a href="">性格测试</a> </span>
+                <span class="pic3"><img src="images/pic03.png" height="41" width="41"/><a href="">狗龄换算</a> </span>
+                <span class="pic4"><img src="images/pic04.png" height="41" width="41"/><a href="">智商测试</a> </span>
+
+            </div>
+            <div>
+                <div class="questionNormal"><img src="images/right.png" height="42" width="41"/>
+                    <span class="kk">养宠物常见小贴士</span><span class="viewMore  low">查看更多</span></div>
+
+                <div class="noList">
+                      <a href="#"> 什么狗最好养</a><a href="#">小狗拉稀怎么办</a><br><a href="#">猫感冒综合征</a><a href="#"> 狗狗不吃东西怎</a><br><a href="#">不掉毛的狗狗</a> <a
+                                href="#">被狗狗抓伤</a><br><a href="#"> 狗感冒症状</a><a href="#">狗狗身上有跳蚤怎么办</a><br><a href="#">怎么训练狗狗大小便</a><a href="#">小猫吃什么 </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="ff mcly"><!--萌宠乐园-->
+        <div class="head">
+            <span class="circle"><img src="images/1.png"/></span><span class="word"> 萌宠乐园<hr size="8"></span>
+            <span class="more"><img src="images/6.png" class="d1"/><img src="images/7.png" class="d2"/></span>
+        </div>
+        <div class="mcly2">
+            <ul class="cwly1">
+                <li><p><img src="images/slider21.jpg" /></p><a href="">积极运动，努力减肥</a> </li>
+                <li><p><img src="images/slider22.jpg" /></p><a href="">你身上有他的香水味</a> </li>
+                <li><p><img src="images/slider23.jpg" /></p><a href="">累了，我想睡会儿</a> </li>
+                <li><p><img src="images/slider24.jpg" /></p><a href="">你身上的味道好好闻哦</a> </li>
+                <li><p><img src="images/slider25.jpg" /></p><a href="">你喜欢我吗？我喜欢你耶</a> </li>
+                <li><p><img src="images/slider26.jpg" /></p><a href="">哈哈哈，被你发现了</a> </li>
+                <li><p><img src="images/slider27.jpg" /></p><a href="">你愿意和我天长地久吗</a> </li>
+                <li><p><img src="images/slider28.jpg" /></p><a href="">别咬我！</a> </li>
+                <li><p><img src="images/slider29.jpg" /></p><a href="">我好累</a> </li>
+            </ul>
+
+        </div>
+        <p onclick="prev()" class="prev"></p>
+        <p onclick="next()" class="next"></p>
+        <script>
+            var len =$(".cwly1 li").length,
+                liW = $(".cwly1 li").outerWidth(true);
+            $(".cwly1").css("width",len*liW);
+            function next() {
+                $(".cwly1 li:first-child").animate({
+                    marginLeft:"-700px" /*移动多少*/
+                },1000,function () {
+                    var tem = $(this).clone();/*克隆函数*/
+                    $(this).remove();/*删除*/
+                    tem.css({marginLeft:"0"});
+                    $(".cwly1").append(tem);/*添加到头部*/
+                });
+            }
+            function prev() {
+                var tem = $(".cwly1 li:last-child").clone();
+                $(".cwly1 li:last-child").remove();
+                tem.css({ marginLeft:"-980px"});
+                $(".cwly1").prepend(tem);
+                $(".cwly1 li:first-child").animate({marginLeft:"0"},1000);
+            }
+
+        </script>
+    </div>
+    <div class="ff cjxw"><!--宠界新闻-->
+        <div class="head">
+            <span class="circle"><img src="images/2.png"/></span><span class="word"> 宠界新闻<hr size="8"></span>
+            <span class="more"><img src="images/6.png" class="d1"/><img src="images/7.png" class="d2"/></span>
+        </div>
+        <div class="c2">
+            <div class="slide" id="banner2">
+
+
+                <div id="banner2_list">
+                    <a href="#" target="_blank"><img src="images/slider31.jpg" title="oo" name="oo" > </a>
+                    <a href="#" target="_blank"><img src="images/slider32.jpg" title="oo" name="oo" > </a>
+                    <a href="#" target="_blank"><img src="images/slider34.jpg" title="oo" name="oo" > </a>
+                </div>
+                <ul class="num">
+                    <li class="on">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+                <ul class="word" id="banner2-word">
+                    <li>
+                       <p><a href="">英国侏儒刺猬 成家养宠物新星</a> </p>
+                        <p>宠物刺猬越来越受到人们的欢迎，在英国掀起一股养侏儒刺猬的热潮...</p>
+                    </li>
+                    <li>
+                        <p><a href="">为了营救小猫，美国男子不惜锯开卡车</a> </p>
+                        <p>艾伦一家都很喜欢动物，他们一共养了一只狗和两只猫咪，也曾经帮助过....</p>
+                    </li>
+                    <li>
+                        <p><a href="">吉娃娃生活超享华成名媛   网友叹“人不如狗”</a> </p>
+                        <p>英国一只吉娃娃过着奢华的生活，不仅拥有自己的衣柜和珠宝首饰，还有...</p>
+                    </li>
+                </ul>
+            </div>
+            <script>
+                var t = n = 0, count;
+                $(document).ready(function () {
+                    count = $("#banner2_list a").length;
+                    $("#banner2_list a:not(:first-child)").hide();
+                    $("#banner2-word li:not(:first-child)").hide();
+                    $("#banner2 li").click(function () {
+                        var i = $(this).text() - 1;
+                        n = i;
+                        if (i >= count) return;
+                        /*点击图片跳转*/
+                        $("#banner2_info").unbind().click(function () {
+                            window.open($("#banner2_list a").eq(i).attr('href'), "_blank")
+                        });
+                        /*图片的变化*/
+                        $("#banner2_list a").filter(":visible").fadeOut(500).parent().children().eq(i).fadeIn(500);
+                        $("#banner2-word li").filter(":visible").fadeOut(500).parent().children().eq(i).fadeIn(500);
+                        document.getElementById("banner2").style.background = "";
+
+                        $(this).siblings().removeAttr("class");
+                        /*找到兄弟元素 移除class属性*/
+                        $(this).toggleClass("on");
+                        /*如果有“on”样式 就移除，没有就添加*/
+
+                    });
+
+                    t = setInterval("showAuto1()", 4000);
+
+                    $("#banner2").hover(function () {
+                        clearInterval(t)
+                    }, function () {
+                        t = setInterval("showAuto1()", 4000);
+                    });
+
+                });
+                function showAuto1() {
+                    n = n >= (count - 1) ? 0 : ++n;/*当n>=(count-1)时 n=0 否则n+1 */
+                    $("#banner2 li").eq(n).trigger('click');
+                }
+
+            </script>
+            <div class="dog1">
+                <div class="picture1">
+                    <img src="images/a.jpg">
+                    <p>傻白甜的萨摩耶</p>
+                </div>
+                <div class="text1">
+                    <p>18公斤大肥猫甩肉成功 成收益诊断所活招牌</p>
+                    <ul>
+                        <li><a href="#">几百条放生蛇遭四川村名捕杀 放生变杀生</a></li>
+                        <li><a href="#">纽约开设小狗健身房 吸引不少爱狗的主人</a></li>
+                        <li><a href="#">妇人为救自己的爱猫 不幸失足坠楼不治身亡</a></li>
+                        <li><a href="#">瑞典三名男子虐杀兔子 被判刑2至4个月</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dog2">
+                <div class="picture1">
+                    <img src="images/b.jpg">
+                    <p>自带"生气表情"的喵</p>
+                </div>
+                <div class="text1">
+                    <p>美马州一母子养78兔子 在屋内任其行走</p>
+                    <ul>
+                        <li><a href="#">世界第一长猫 长度比7岁小孩都要高</a></li>
+                        <li><a href="#">华裔居民走私乌龟 将面临21个月的监狱生活</a></li>
+                        <li><a href="#">黄石公园大灰熊咬死人后被捕或被处死</a></li>
+                        <li><a href="#">跑的最快 英乌龟打破38年之久的世界纪录</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ff xcjq"><!--选宠技巧-->
+        <div class="head">
+            <span class="circle"><img src="images/3.png"/></span><span class="word">选宠技巧<hr size="8"></span>
+            <span class="more"><img src="images/6.png" class="d1"/><img src="images/7.png" class="d2"/></span>
+        </div>
+        <div class="text2">
+            <div class="choose one">
+                <p><span class="choosepp">选狗</span><span class="viewMore">查看更多</span></p>
+                <img src="images/choose1.jpg">
+                <ul>
+                    <li><a href="#">• 如何挑选巴吉度猎犬 背部呈现水平无凹凸不平的</a></li>
+                    <li><a href="#">• 德国牧羊犬挑选 在幼犬生后40天最为合适挑选</a></li>
+                    <li><a href="#">• 如何选购迷你牛头梗 最好选择性格外向的幼犬</a></li>
+                </ul>
+
+            </div>
+            <div class="choose two">
+                <p><span class="choosepp">选猫</span><span class="viewMore">查看更多</span></p>
+                <img src="images/choose2.jpg">
+                <ul>
+                    <li><a href="#">• 英短猫多少钱一只 英短猫的选购方法技巧</a></li>
+                    <li><a href="#">• 暹罗猫大概多少钱 世界著名的短毛猫</a></li>
+                    <li><a href="#">• 糖果般甜美 4招纯种折耳猫带回家</a></li>
+                </ul>
+
+            </div>
+            <div class="choose three">
+                <p><span class="choosepp">其他宠物</span><span class="viewMore">查看更多</span></p>
+                <img src="images/choose1.jpg">
+                <ul>
+                    <li><a href="#">• 雪地松鼠多少钱一只 价格一般在100元到300元不</a></li>
+                    <li><a href="#">• 欧洲红松鼠多少钱 价格一般在400元左右</a></li>
+                    <li><a href="#">• 宠物蜘蛛多少钱 品种不一样价格也会不同</a></li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="ff yhcs"  ><!--养护常识-->
+        <div class="head">
+        <span class="circle"><img src="images/4.png"/></span><span class="word"> 养护常识<hr size="8"></span>
+        <span class="more"><img src="images/6.png" class="d1"/><img src="images/7.png" class="d2"/></span>
+    </div>
+        <div class="first">
+            <div class="gg">
+
+                <img src="images/gg.jpg">
+                <p>狗狗</p>
+                <ul>
+                    <li><a>• 养狗狗的注意事项 绝对不能给狗狗喝牛奶</a></li>
+                    <li><a>• 约克夏怎么饲养 约夏克犬的运动量不宜过大</a></li>
+                    <li><a>• 怎样饲养德国牧羊犬 饮水要清洁每天需提供2到3次</a></li>
+                    <li><a>• 怎样喂养比格犬 要注意饮食方面的控制</a></li>
+                    <li><a>• 怎样饲养博美犬 喂食要定时定量营养要平衡</a></li>
+                </ul>
+            </div>
+            <div class="gg">
+
+                <img src="images/tt.jpg">
+                <p class="tt">兔兔</p>
+                <ul>
+                    <li><a>• 怎么养宠物兔子 苜蓿草幼兔不可缺少的食物</a></li>
+                    <li><a>• 迷你垂耳兔怎么饲养 垂耳兔喜欢干燥干净的环境</a></li>
+                    <li><a>• 如何饲养垂耳兔 饮成兔适宜的温度为15到25度</a></li>
+                    <li><a>• 垂耳兔如何喂养 兔子喝的水需要凉开水</a></li>
+                    <li><a>• 英国安哥拉兔能活多久 安哥拉兔能活10年左右</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="second">
+            <div class="gg">
+
+                <img src="images/mm.jpg">
+                <p>猫猫</p>
+                <ul>
+                    <li><a>• 小猫咪怎么样 保证奶猫食用用具的清洁卫生</a></li>
+                    <li><a>• 猫尾巴用什么 猫的尾巴怎么清洗你知道吗</a></li>
+                    <li><a>• 豹猫可以养吗 野生的猫是濒危保护动物</a></li>
+                    <li><a>• 垂耳兔什么时候成年 怎么看垂耳兔多大了</a></li>
+                    <li><a>• 猫发情跑了怎么办 猫发情有哪些主要表现</a></li>
+                </ul>
+            </div>
+            <div class="gg">
+
+                <img src="images/yy.jpg">
+                <p class="tt">其他</p>
+                <ul>
+                    <li><a>• 雪地松鼠寿命 雪地松鼠寿命一般是5到6年</a></li>
+                    <li><a>• 雪地松鼠繁殖 雌性8到9周领最适合繁殖</a></li>
+                    <li><a>• 雪地松鼠和魔王松鼠的区别 雪地松鼠四季都有耳</a></li>
+                    <li><a>• 雪地松鼠怎么养 一般以壳斗科植物的种子为食</a></li>
+                    <li><a>• 宠物蜘蛛品种 六种最常见最受欢迎的宠物蜘蛛</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="third">
+            <div class="questionNormal oo"><img src="images/right.png" height="42" width="41"/>
+                <span class="kk">养宠物常见小贴士</span><span class="viewMore rr">查看更多</span></div>
+            <div class="list">
+                <p>+<span class="colorOrange">狗狗</span>常见问题+</p>
+                <ul>
+                    <li><span> • </span><a href="#">狗一天吃几顿</a><span> • </span><a href="#">狗一天睡几个小时</a></li>
+                    <li><span> • </span><a href="#">够能吃的水果</a><span> • </span><a href="#">够能吃的东西</a><span> • </span><a
+                            href="#">狗如何配种</a></li>
+                    <li><span> • </span><a href="#">狗如何驱虫</a><span> • </span><a
+                            href="#">狗晚上一只叫</a><span> • </span><a
+                            href="#">狗晚上睡觉吗</a></li>
+                    <li><span> • </span><a href="#">狗晚上能看见东西吗</a><span> • </span><a href="#">狗发出呜呜的声音</a></li>
+                    <li><span> • </span><a href="#">狗会做梦吗</a><span> • </span><a href="#">狗会游泳吗</a><span> • </span><a
+                            href="#">狗发情几天配</a></li>
+                    <li><span> • </span><a href="#">被狗狗抓伤怎么办</a><span> • </span><a
+                            href="#">狗睡觉抽搐</a><span> • </span><a
+                            href="#">狗生理期</a></li>
+                    <li><span> • </span><a href="#">狗是色盲吗</a><span> • </span><a href="#">狗怎么托运</a><span> • </span><a
+                            href="#">狗如何避孕</a></li>
+                    <li><span> • </span><a href="#">狗狗身上有跳蚤怎么办</a><span> • </span><a href="#">狗怕什么</a></li>
+                    <li><span> • </span><a href="#">狗看世界是什么颜色</a><span> • </span><a href="#">被狗咬了怎么办</a></li>
+                    <li><span> • </span><a href="#">狗乱叫怎么办</a><span> • </span><a
+                            href="#">狗的皮肤病</a><span> • </span><a
+                            href="#">狗的寿命</a></li>
+                    <li><span> • </span><a href="#">狗感冒症状</a><span> • </span><a href="#">不掉毛的狗</a></li>
+                    <li><span> • </span><a href="#">怎么训练狗狗大小便</a><span> • </span><a href="#">狗狗不吃东西怎么办</a></li>
+                    <li><span> • </span><a href="#">小狗拉稀怎么办</a><span> • </span><a href="#">什么狗最好养</a></li>
+                    <li><span> • </span><a href="#">狗不能吃什么东西</a></li>
+                </ul>
+                <hr >
+                <p>+<span class="colorOrange">猫猫</span>常见问题</p>
+                <ul>
+                    <li><span> • </span><a href="#">猫乱尿怎么办</a><span> • </span><a href="#">猫发出咕噜咕噜的声音</a></li>
+                    <li><span> • </span><a href="#">猫怕什么</a><span> • </span><a href="#">猫晚上睡觉吗</a><span> • </span><a
+                            href="#">猫下巴毛囊炎</a></li>
+                    <li><span> • </span><a href="#">猫晚上叫怎么办</a><span> • </span><a href="#">猫要交配多久</a></li>
+                    <li><span> • </span><a href="#">猫会游泳吗</a><span> • </span><a href="#">猫一天睡几个小时</a></li>
+                    <li><span> • </span><a href="#">猫会咬人吗</a><span> • </span><a href="#">小猫吃什么</a><span> • </span><a
+                            href="#">猫感冒症状</a></li>
+                    <li><span> • </span><a href="#">猫的寿命</a><span> • </span><a href="#">猫如何分公母</a><span> • </span><a
+                            href="#">猫一天拉几次</a></li>
+                    <li><span> • </span><a href="#">猫为什么怕水</a><span> • </span><a href="#">猫一天吃几顿</a></li>
+                    <li><span> • </span><a href="#">猫能吃的东西</a><span> • </span><a href="#">猫能吃的水果</a></li>
+                    <li><span> • </span><a href="#">猫不能吃什么</a><span> • </span><a href="#">被猫抓伤怎么办</a></li>
+                    <li><span> • </span><a href="#">猫发情的表现</a></li>
+                </ul>
+                <hr >
+                <p>+<span class="colorOrange">其他</span>常见问题</p>
+            </div>
+    </div>
+    </div>
+    <div class="ff cwxl"><!--宠物训练-->
+        <div class="head">
+            <span class="circle"><img src="images/5.png"/></span><span class="word"> 宠物训练<hr size="8"></span>
+            <span class="more"><img src="images/6.png" class="d1"/><img src="images/7.png" class="d2"/></span>
+        </div>
+        <div class="text2">
+            <div class="choose one">
+                <p><span class="choosepp">训练狗狗</span><span class="viewMore">查看更多</span></p>
+                <img src="images/choose1.jpg">
+                <ul>
+                    <li><a href="#">• 西藏猎犬的训练方法 配合训练的时候要适当</a></li>
+                    <li><a href="#">• 训练惠比特犬 惠比特犬力量训练要负重抗阻力</a></li>
+                    <li><a href="#">• 万能梗训练 饮食习惯的训练要定点定量喂</a></li>
+                </ul>
+
+            </div>
+            <div class="choose two">
+                <p><span class="choosepp">训练猫猫</span><span class="viewMore">查看更多</span></p>
+                <img src="images/choose2.jpg">
+                <ul>
+                    <li><a href="#">• 怎么训练猫猫睡猫窝 幼猫训练时需要注意事项</a></li>
+                    <li><a href="#">• 如何训练猫咪听话 温柔猫咪训练养成法</a></li>
+                    <li><a href="#">• 猫皮肤病有哪些种 跳蚤过敏性皮肤炎</a></li>
+                </ul>
+
+            </div>
+            <div class="choose three">
+                <p><span class="choosepp">训练其他宠物</span><span class="viewMore">查看更多</span></p>
+                <img src="images/choose1.jpg">
+                <ul>
+                    <li><a href="#">• 垂耳兔怎么教上厕所 可以通过奖励的方式来让</a></li>
+                    <li><a href="#">• 绿鬣蜥训练一定要注重训练的方法和重点</a></li>
+                    <li><a href="#">• 宠物貂怎么训练 采用貂最爱吃的小零食来训练</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+</article>
+<footer><!--底部标签-->
+    <div class="footer">
+        <dl>
+            <dt><img src="images/21.png" height="36" width="44"/>关于我们</dt>
+            <dd>
+                <a href="#">网站介绍</a><br>
+                <a href="#">广告服务</a><br>
+                <a href="#">联系我们</a><br>
+                <a href="#">免责声明</a><br>
+            </dd>
+        </dl>
+        <dl>
+            <dt><img src="images/26.png" height="37" width="43"/>社交网络</dt>
+            <dd>
+                <a href="#">QQ空间</a><br>
+                <a href="#">新浪微博</a><br>
+                <a href="#">腾讯微博</a><br>
+            </dd>
+        </dl>
+        <dl>
+            <!--此处插入图片-->
+            <a href="#"><img src="images/10.png" height="232" width="241"/></a>
+        </dl>
+
+        <dl>
+            <dt><img src="images/23.png" height="37" width="43"/>频道推荐</dt>
+            <dd>
+                <a href="#">宠界新闻</a><br>
+                <a href="#">选宠技巧</a><br>
+                <a href="#">养护常识</a><br>
+                <a href="#">宠物训练</a><br>
+            </dd>
+        </dl>
+        <dl>
+            <dt><img src="images/24.png" height="36" width="44"/>微信关注</dt>
+            <dd>
+                <!--此处插入二维码-->
+                <img src="images/二维码.png" height="154" width="154"/></dd>
+        </dl>
+
+    </div>
+    <div
+            style="height: 50px;position: relative;top: -10px;text-align: center;color: white;background-color: #0d3349;line-height: 50px">
+        <p class="copyright">COPYRIGHT © 2014-2015 ichong123.com INC. ALL RIGHTS RESERVED.
+            爱宠网 信息产业部备案序号：<a href="#">沪ICP备16014089号</a> 客服QQ:648581378</p>
+    </div>
+</footer>
+</body>
+</html>
